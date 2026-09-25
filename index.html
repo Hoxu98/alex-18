@@ -3,58 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Alex — 18 urodziny</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
 
-  .gallery-section {
-  margin-top: 45px;
-  padding-top: 30px;
-  border-top: 1px solid #5d4920;
-}
-
-.gallery-title span {
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: #b8943e;
-}
-
-.gallery-title h3 {
-  font-family: Georgia, serif;
-  font-size: 28px;
-  font-weight: normal;
-  color: #d9b45a;
-  margin: 8px 0 25px;
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-}
-
-.gallery img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid #3d321d;
-  cursor: pointer;
-  transition: transform .2s;
-}
-
-.gallery img:hover {
-  transform: scale(1.02);
-}
-
-.gallery-loading {
-  grid-column: 1 / -1;
-  color: #8f8a80;
-  font-size: 13px;
-  padding: 20px;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -65,10 +24,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* GŁÓWNA KARTA */
+
 .wrap {
   min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 25px;
 }
@@ -79,12 +39,26 @@ body {
   padding: 45px 25px;
   border: 1px solid #9c7a2b;
   border-radius: 24px;
-  background: linear-gradient(145deg, #151515, #080808);
-  box-shadow: 0 0 50px rgba(190,150,50,.15);
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(180,140,50,.12),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      #151515,
+      #080808
+    );
+
+  box-shadow:
+    0 0 50px rgba(190,150,50,.15);
 }
 
 .crown {
   font-size: 42px;
+  margin-bottom: 5px;
 }
 
 .small {
@@ -97,20 +71,28 @@ body {
 h1 {
   font-family: Georgia, serif;
   font-size: 64px;
+  line-height: .95;
   margin: 12px 0;
+
   color: #d9b45a;
+
+  text-shadow:
+    0 0 25px rgba(217,180,90,.2);
 }
 
 h2 {
   font-family: Georgia, serif;
   font-weight: 400;
   font-size: 25px;
+  margin: 0 0 18px;
 }
 
 .date {
   color: #d7d0c3;
   margin-bottom: 32px;
 }
+
+/* PRZYCISK */
 
 input {
   display: none;
@@ -119,35 +101,287 @@ input {
 .button {
   display: block;
   width: 100%;
+
   padding: 17px;
+
   border-radius: 14px;
+
   cursor: pointer;
+
   font-size: 16px;
   font-weight: bold;
-  background: linear-gradient(90deg,#b88a2c,#e0bd61,#b88a2c);
+
+  background:
+    linear-gradient(
+      90deg,
+      #b88a2c,
+      #e0bd61,
+      #b88a2c
+    );
+
   color: #111;
+
+  box-shadow:
+    0 5px 20px rgba(190,150,50,.15);
+
+  transition: transform .2s;
+}
+
+.button:active {
+  transform: scale(.97);
 }
 
 #status {
   margin-top: 20px;
   font-size: 14px;
   color: #d9b45a;
+
   min-height: 20px;
 }
 
-#preview {
-  display: none;
-  max-width: 100%;
-  max-height: 250px;
-  margin: 20px auto 0;
-  border-radius: 14px;
+/* GALERIA */
+
+.gallery-section {
+
+  margin-top: 50px;
+
+  padding-top: 35px;
+
+  border-top:
+    1px solid #5d4920;
 }
 
-.note {
-  margin-top: 18px;
-  font-size: 12px;
-  color: #8f8a80;
+.gallery-title span {
+
+  font-size: 10px;
+
+  letter-spacing: 4px;
+
+  color: #b8943e;
 }
+
+.gallery-title h3 {
+
+  font-family: Georgia, serif;
+
+  font-size: 29px;
+
+  font-weight: normal;
+
+  color: #d9b45a;
+
+  margin:
+    8px 0 25px;
+}
+
+.gallery {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 8px;
+}
+
+.gallery img {
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  border:
+    1px solid #3d321d;
+
+  cursor: pointer;
+
+  transition:
+    transform .2s,
+    opacity .2s;
+}
+
+.gallery img:hover {
+
+  transform:
+    scale(1.02);
+
+  opacity: .9;
+}
+
+.gallery-loading {
+
+  grid-column:
+    1 / -1;
+
+  color: #8f8a80;
+
+  font-size: 13px;
+
+  padding: 20px;
+}
+
+/* FULLSCREEN */
+
+.lightbox {
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0,0,0,.96);
+
+  z-index: 9999;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 55px 20px 70px;
+}
+
+.lightbox.active {
+
+  display: flex;
+}
+
+.lightbox-image {
+
+  max-width: 100%;
+
+  max-height: 82vh;
+
+  object-fit: contain;
+
+  border-radius: 8px;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  box-shadow:
+    0 0 50px
+    rgba(0,0,0,.6);
+}
+
+/* ZAMKNIĘCIE */
+
+.close {
+
+  position: absolute;
+
+  top: 15px;
+
+  right: 20px;
+
+  width: 45px;
+
+  height: 45px;
+
+  border-radius: 50%;
+
+  border: 1px solid #80652c;
+
+  background: #111;
+
+  color: #d9b45a;
+
+  font-size: 28px;
+
+  cursor: pointer;
+
+  z-index: 10;
+}
+
+/* STRZAŁKI */
+
+.nav {
+
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 45px;
+
+  height: 45px;
+
+  border-radius: 50%;
+
+  border: 1px solid #80652c;
+
+  background: rgba(10,10,10,.8);
+
+  color: #d9b45a;
+
+  font-size: 25px;
+
+  cursor: pointer;
+
+  z-index: 10;
+}
+
+.prev {
+
+  left: 15px;
+}
+
+.next {
+
+  right: 15px;
+}
+
+/* LICZNIK */
+
+.counter {
+
+  position: absolute;
+
+  bottom: 22px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  color: #d9b45a;
+
+  font-size: 13px;
+
+  letter-spacing: 2px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .lightbox-image {
+
+    max-height: 78vh;
+  }
+
+  .nav {
+
+    width: 40px;
+    height: 40px;
+  }
+
+  .prev {
+    left: 8px;
+  }
+
+  .next {
+    right: 8px;
+  }
+}
+
 </style>
 </head>
 
@@ -155,168 +389,599 @@ input {
 
 <div class="wrap">
 
-<div class="gallery-section">
+<main class="card">
 
-  <div class="gallery-title">
-    <span>WSPÓLNE WSPOMNIENIA</span>
-    <h3>Galeria 📸</h3>
+  <div class="crown">
+    ♛
   </div>
 
-  <div id="gallery" class="gallery">
-    <div class="gallery-loading">
-      Ładowanie zdjęć...
-    </div>
+  <div class="small">
+    18. urodziny
   </div>
-</div>
-  
-  <main class="card">
 
-    <div class="crown">♛</div>
+  <h1>
+    Alex
+  </h1>
 
-    <div class="small">
-      18. urodziny
-    </div>
+  <h2>
+    Let's make memories.
+  </h2>
 
-    <h1>Alex</h1>
+  <div class="date">
+    26.09.2026
+  </div>
 
-    <h2>Let's make memories.</h2>
+  <!-- DODAWANIE ZDJĘCIA -->
 
-    <div class="date">
-      26.09.2026
-    </div>
+  <label for="photo">
 
-    <label for="photo">
+    <span class="button">
+      📸 DODAJ ZDJĘCIE
+    </span>
 
-      <span class="button">
-        📸 DODAJ ZDJĘCIE
+  </label>
+
+  <input
+    id="photo"
+    type="file"
+    accept="image/*"
+    capture="environment"
+  >
+
+  <div id="status"></div>
+
+
+  <!-- GALERIA -->
+
+  <section class="gallery-section">
+
+    <div class="gallery-title">
+
+      <span>
+        WSPÓLNE WSPOMNIENIA
       </span>
 
-    </label>
+      <h3>
+        Galeria 📸
+      </h3>
 
-    <input
-      id="photo"
-      type="file"
-      accept="image/*"
-      capture="environment"
-    >
-
-    <img id="preview">
-
-    <div id="status"></div>
-
-    <div class="note">
-      Zrób zdjęcie lub wybierz je z galerii.
-      <br>
-      Zdjęcie zostanie dodane do wspólnej galerii.
     </div>
 
-  </main>
+    <div
+      id="gallery"
+      class="gallery"
+    >
+
+      <div class="gallery-loading">
+        Ładowanie zdjęć...
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
 
 </div>
 
+
+<!-- FULLSCREEN -->
+
+<div
+  id="lightbox"
+  class="lightbox"
+>
+
+  <button
+    class="close"
+    id="close"
+  >
+    ×
+  </button>
+
+  <button
+    class="nav prev"
+    id="prev"
+  >
+    ‹
+  </button>
+
+  <img
+    id="lightboxImage"
+    class="lightbox-image"
+  >
+
+  <button
+    class="nav next"
+    id="next"
+  >
+    ›
+  </button>
+
+  <div
+    id="counter"
+    class="counter"
+  ></div>
+
+</div>
+
+
 <script>
 
-const UPLOAD_URL = "https://script.google.com/macros/s/AKfycbxHbh3NOYIV00cJ8GNy_unOXHp3IKCTYbJF5Gyh-1O1W6VU7V0AJhZ1bF901UOJrMdJ/exec";
+/* =====================================
+   TWÓJ GOOGLE APPS SCRIPT
+   ===================================== */
 
-const input = document.getElementById("photo");
-const preview = document.getElementById("preview");
-const status = document.getElementById("status");
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbxHbh3NOYIV00cJ8GNy_unOXHp3IKCTYbJF5Gyh-1O1W6VU7V0AJhZ1bF901UOJrMdJ/exec";
 
-input.addEventListener("change", async () => {
 
-  const file = input.files[0];
+/* =====================================
+   UPLOAD ZDJĘĆ
+   ===================================== */
 
-  if (!file) return;
+const input =
+document.getElementById("photo");
 
-  preview.src = URL.createObjectURL(file);
-  preview.style.display = "block";
+const status =
+document.getElementById("status");
 
-  status.textContent = "⏳ Wysyłanie zdjęcia...";
+input.addEventListener(
+  "change",
+  async () => {
 
-  const reader = new FileReader();
+    const file =
+      input.files[0];
 
-  reader.onload = async function() {
+    if (!file) return;
 
-    const data = {
-      fileName: Date.now() + "_" + file.name,
-      mimeType: file.type,
-      file: reader.result
+    status.textContent =
+      "⏳ Wysyłanie zdjęcia...";
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload =
+    async function() {
+
+      const data = {
+
+        fileName:
+          Date.now()
+          + "_"
+          + file.name,
+
+        mimeType:
+          file.type,
+
+        file:
+          reader.result
+
+      };
+
+
+      try {
+
+        const response =
+          await fetch(
+            WEB_APP_URL,
+            {
+
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "text/plain;charset=utf-8"
+              },
+
+              body:
+                JSON.stringify(data)
+
+            }
+          );
+
+
+        status.textContent =
+          "✅ Zdjęcie zostało dodane!";
+
+
+        /*
+          Odśwież galerię
+        */
+
+        setTimeout(
+          loadGallery,
+          1000
+        );
+
+
+      } catch(error) {
+
+        console.error(error);
+
+        status.textContent =
+          "❌ Nie udało się wysłać zdjęcia.";
+
+      }
+
     };
 
-    try {
 
-      await fetch(UPLOAD_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(data)
-      });
+    reader.readAsDataURL(file);
 
-      status.textContent = "✅ Zdjęcie zostało dodane!";
+  }
+);
 
-    } catch (error) {
 
-      console.error(error);
+/* =====================================
+   GALERIA
+   ===================================== */
 
-      status.textContent =
-        "❌ Nie udało się wysłać zdjęcia.";
+let photos = [];
 
-    }
+let currentPhoto = 0;
 
-  };
 
-  reader.readAsDataURL(file);
+function loadGallery() {
 
-});
+  const script =
+    document.createElement("script");
 
-</script>
-<script>
 
-const GALLERY_URL = "https://script.google.com/macros/s/AKfycbxHbh3NOYIV00cJ8GNy_unOXHp3IKCTYbJF5Gyh-1O1W6VU7V0AJhZ1bF901UOJrMdJ/exec";
+  script.src =
+    WEB_APP_URL
+    + "?callback=galleryCallback&t="
+    + Date.now();
 
-function loadGallery(photos) {
 
-  const gallery = document.getElementById("gallery");
+  document.body.appendChild(script);
+
+}
+
+
+function galleryCallback(data) {
+
+  photos =
+    data || [];
+
+
+  photos.reverse();
+
+
+  const gallery =
+    document.getElementById(
+      "gallery"
+    );
+
 
   gallery.innerHTML = "";
 
-  if (!photos || photos.length === 0) {
+
+  if (
+    photos.length === 0
+  ) {
 
     gallery.innerHTML =
-      '<div class="gallery-loading">Nie ma jeszcze zdjęć 📸</div>';
+      '<div class="gallery-loading">'
+      + 'Nie ma jeszcze zdjęć 📸'
+      + '</div>';
 
     return;
+
   }
 
-  photos.reverse().forEach(photo => {
 
-    const img = document.createElement("img");
+  photos.forEach(
+    (photo, index) => {
 
-    img.src = photo.url;
-    img.alt = "Zdjęcie z 18. urodzin Alexa";
+      const img =
+        document.createElement(
+          "img"
+        );
 
-    img.loading = "lazy";
 
-    gallery.appendChild(img);
+      img.src =
+        photo.url;
 
-  });
+
+      img.alt =
+        "Zdjęcie z 18. urodzin Alexa";
+
+
+      img.loading =
+        "lazy";
+
+
+      img.addEventListener(
+        "click",
+        () => {
+
+          openLightbox(index);
+
+        }
+      );
+
+
+      gallery.appendChild(
+        img
+      );
+
+    }
+  );
 
 }
 
-function galleryCallback(data) {
-  loadGallery(data);
+
+/* =====================================
+   LIGHTBOX
+   ===================================== */
+
+const lightbox =
+document.getElementById(
+  "lightbox"
+);
+
+const lightboxImage =
+document.getElementById(
+  "lightboxImage"
+);
+
+const counter =
+document.getElementById(
+  "counter"
+);
+
+
+function openLightbox(index) {
+
+  if (
+    !photos.length
+  ) return;
+
+
+  currentPhoto =
+    index;
+
+
+  updateLightbox();
+
+
+  lightbox.classList.add(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "hidden";
+
 }
 
-const script = document.createElement("script");
 
-script.src =
-  GALLERY_URL +
-  "?callback=galleryCallback&t=" +
-  Date.now();
+function closeLightbox() {
 
-document.body.appendChild(script);
+  lightbox.classList.remove(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+function updateLightbox() {
+
+  const photo =
+    photos[currentPhoto];
+
+
+  lightboxImage.src =
+    photo.url;
+
+
+  counter.textContent =
+    (currentPhoto + 1)
+    + " / "
+    + photos.length;
+
+}
+
+
+function nextPhoto() {
+
+  if (
+    !photos.length
+  ) return;
+
+
+  currentPhoto =
+    (currentPhoto + 1)
+    % photos.length;
+
+
+  updateLightbox();
+
+}
+
+
+function previousPhoto() {
+
+  if (
+    !photos.length
+  ) return;
+
+
+  currentPhoto =
+    (
+      currentPhoto
+      - 1
+      + photos.length
+    )
+    % photos.length;
+
+
+  updateLightbox();
+
+}
+
+
+/* =====================================
+   PRZYCISKI
+   ===================================== */
+
+document
+  .getElementById("close")
+  .addEventListener(
+    "click",
+    closeLightbox
+  );
+
+
+document
+  .getElementById("next")
+  .addEventListener(
+    "click",
+    nextPhoto
+  );
+
+
+document
+  .getElementById("prev")
+  .addEventListener(
+    "click",
+    previousPhoto
+  );
+
+
+/* =====================================
+   KLIK POZA ZDJĘCIEM
+   ===================================== */
+
+lightbox.addEventListener(
+  "click",
+  function(e) {
+
+    if (
+      e.target === lightbox
+    ) {
+
+      closeLightbox();
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   KLAWIATURA
+   ===================================== */
+
+document.addEventListener(
+  "keydown",
+  function(e) {
+
+    if (
+      !lightbox.classList.contains(
+        "active"
+      )
+    ) return;
+
+
+    if (
+      e.key === "Escape"
+    ) {
+
+      closeLightbox();
+
+    }
+
+
+    if (
+      e.key === "ArrowRight"
+    ) {
+
+      nextPhoto();
+
+    }
+
+
+    if (
+      e.key === "ArrowLeft"
+    ) {
+
+      previousPhoto();
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   OBSŁUGA SWIPE NA TELEFONIE
+   ===================================== */
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+
+lightbox.addEventListener(
+  "touchstart",
+  function(e) {
+
+    touchStartX =
+      e.changedTouches[0].screenX;
+
+  }
+);
+
+
+lightbox.addEventListener(
+  "touchend",
+  function(e) {
+
+    touchEndX =
+      e.changedTouches[0].screenX;
+
+
+    const difference =
+      touchStartX - touchEndX;
+
+
+    if (
+      Math.abs(difference)
+      < 50
+    ) return;
+
+
+    if (
+      difference > 0
+    ) {
+
+      nextPhoto();
+
+    } else {
+
+      previousPhoto();
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   START
+   ===================================== */
+
+loadGallery();
 
 </script>
+
 </body>
 </html>
