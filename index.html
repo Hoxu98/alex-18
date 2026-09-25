@@ -4,51 +4,212 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Alex — 18 urodziny</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#090909;color:#f5f1e8;font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
-.card{width:min(430px,100%);text-align:center;padding:46px 26px;border:1px solid #9c7a2b;border-radius:24px;background:linear-gradient(145deg,#111 0%,#090909 100%);box-shadow:0 0 45px rgba(191,150,55,.12)}
-.crown{font-size:42px;margin-bottom:8px}
-.small{letter-spacing:5px;text-transform:uppercase;font-size:12px;color:#c9a34d}
-h1{font-family:Georgia,serif;font-size:64px;line-height:.95;margin:12px 0;color:#d9b45a}
-h2{font-family:Georgia,serif;font-weight:400;font-size:27px;margin:0 0 18px}
-.date{color:#d7d0c3;margin-bottom:34px}
-button{width:100%;border:0;border-radius:14px;padding:16px 18px;font-size:16px;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#b88a2c,#e0bd61,#b88a2c);color:#111}
-input{display:none}
-.note{font-size:12px;color:#8f8a80;margin-top:18px;line-height:1.5}
-#preview{display:none;max-width:100%;max-height:240px;border-radius:14px;margin:20px auto 0}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #090909;
+  color: #f5f1e8;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.card {
+  width: min(430px, 100%);
+  text-align: center;
+  padding: 45px 25px;
+  border: 1px solid #9c7a2b;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #151515, #080808);
+  box-shadow: 0 0 50px rgba(190,150,50,.15);
+}
+
+.crown {
+  font-size: 42px;
+}
+
+.small {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #c9a34d;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: 64px;
+  margin: 12px 0;
+  color: #d9b45a;
+}
+
+h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.date {
+  color: #d7d0c3;
+  margin-bottom: 32px;
+}
+
+input {
+  display: none;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 17px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#b88a2c,#e0bd61,#b88a2c);
+  color: #111;
+}
+
+#status {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #d9b45a;
+  min-height: 20px;
+}
+
+#preview {
+  display: none;
+  max-width: 100%;
+  max-height: 250px;
+  margin: 20px auto 0;
+  border-radius: 14px;
+}
+
+.note {
+  margin-top: 18px;
+  font-size: 12px;
+  color: #8f8a80;
+}
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
+
   <main class="card">
+
     <div class="crown">♛</div>
-    <div class="small">18. urodziny</div>
+
+    <div class="small">
+      18. urodziny
+    </div>
+
     <h1>Alex</h1>
+
     <h2>Let's make memories.</h2>
-    <div class="date">26.09.2026</div>
+
+    <div class="date">
+      26.09.2026
+    </div>
 
     <label for="photo">
-      <span class="button" style="display:block;width:100%;border-radius:14px;padding:16px 18px;font-size:16px;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#b88a2c,#e0bd61,#b88a2c);color:#111">
+
+      <span class="button">
         📸 DODAJ ZDJĘCIE
       </span>
-    </label>
-    <input id="photo" type="file" accept="image/*" capture="environment">
 
-    <img id="preview" alt="Podgląd zdjęcia">
-    <div class="note">Wybierz zdjęcie z galerii albo zrób nowe aparatem.</div>
+    </label>
+
+    <input
+      id="photo"
+      type="file"
+      accept="image/*"
+      capture="environment"
+    >
+
+    <img id="preview">
+
+    <div id="status"></div>
+
+    <div class="note">
+      Zrób zdjęcie lub wybierz je z galerii.
+      <br>
+      Zdjęcie zostanie dodane do wspólnej galerii.
+    </div>
+
   </main>
+
 </div>
+
 <script>
-const input=document.getElementById('photo');
-const preview=document.getElementById('preview');
-input.addEventListener('change',()=>{
-  const file=input.files[0];
-  if(!file) return;
-  preview.src=URL.createObjectURL(file);
-  preview.style.display='block';
+
+const UPLOAD_URL = "https://script.google.com/macros/s/AKfycbxHbh3NOYIV00cJ8GNy_unOXHp3IKCTYbJF5Gyh-1O1W6VU7V0AJhZ1bF901UOJrMdJ/exec";
+
+const input = document.getElementById("photo");
+const preview = document.getElementById("preview");
+const status = document.getElementById("status");
+
+input.addEventListener("change", async () => {
+
+  const file = input.files[0];
+
+  if (!file) return;
+
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = "block";
+
+  status.textContent = "⏳ Wysyłanie zdjęcia...";
+
+  const reader = new FileReader();
+
+  reader.onload = async function() {
+
+    const data = {
+      fileName: Date.now() + "_" + file.name,
+      mimeType: file.type,
+      file: reader.result
+    };
+
+    try {
+
+      await fetch(UPLOAD_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(data)
+      });
+
+      status.textContent = "✅ Zdjęcie zostało dodane!";
+
+    } catch (error) {
+
+      console.error(error);
+
+      status.textContent =
+        "❌ Nie udało się wysłać zdjęcia.";
+
+    }
+
+  };
+
+  reader.readAsDataURL(file);
+
 });
+
 </script>
+
 </body>
 </html>
