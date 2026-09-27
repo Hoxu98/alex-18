@@ -99,16 +99,20 @@
       font-size: 14px;
     }
 
+    /* POBIERZ WSZYSTKO */
+
     .download-all {
       display: block;
       width: 100%;
       max-width: 500px;
-      margin: 0 auto 15px;
+      margin: 0 auto 12px;
       padding: 17px 20px;
       border: 1px solid #d9b45a;
       border-radius: 14px;
       background: linear-gradient(135deg, #d9b45a, #b9943d);
       color: #080808;
+      text-align: center;
+      text-decoration: none;
       font-size: 15px;
       font-weight: bold;
       letter-spacing: 1px;
@@ -123,83 +127,12 @@
 
     .download-info {
       text-align: center;
-      color: #888;
-      font-size: 13px;
-      margin-bottom: 25px;
+      color: #777;
+      font-size: 12px;
+      margin-bottom: 30px;
     }
 
-    .batch-panel {
-      display: none;
-      max-width: 600px;
-      margin: 0 auto 35px;
-      padding: 20px;
-      background: #0b0b0b;
-      border: 1px solid #4b3a17;
-      border-radius: 18px;
-      text-align: center;
-    }
-
-    .batch-panel.active {
-      display: block;
-    }
-
-    .batch-counter {
-      color: #d9b45a;
-      font-size: 15px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      margin-bottom: 15px;
-    }
-
-    .batch-image-wrap {
-      background: #000;
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 15px;
-    }
-
-    .batch-image {
-      display: block;
-      width: 100%;
-      max-height: 70vh;
-      object-fit: contain;
-    }
-
-    .batch-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .batch-download,
-    .batch-next {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .batch-download {
-      background: #d9b45a;
-      color: #090909;
-    }
-
-    .batch-next {
-      background: #181818;
-      color: #fff;
-      border: 1px solid #444;
-    }
-
-    .batch-finished {
-      color: #d9b45a;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 20px 0;
-    }
+    /* GALERIA */
 
     .gallery {
       display: grid;
@@ -244,13 +177,7 @@
       background: #202020;
     }
 
-    .loading {
-      text-align: center;
-      color: #aaa;
-      padding: 50px 20px;
-      grid-column: 1 / -1;
-    }
-
+    .loading,
     .empty {
       text-align: center;
       color: #888;
@@ -295,13 +222,6 @@
       color: #aaa;
       font-size: 13px;
       margin: 10px 0;
-    }
-
-    .lightbox-buttons {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
     }
 
     .lightbox-download {
@@ -405,6 +325,7 @@
   <main class="card">
 
     <section class="hero">
+
       <div class="crown">♛</div>
 
       <div class="small-title">
@@ -422,76 +343,46 @@
       <div class="date">
         26.09.2026
       </div>
+
     </section>
 
 
     <section class="gallery-title">
+
       <h2>WSPÓLNE WSPOMNIENIA</h2>
-      <p>Zdjęcia z 18. urodzin Alexa 📸</p>
+
+      <p>
+        Zdjęcia z 18. urodzin Alexa 📸
+      </p>
+
     </section>
 
 
-    <button
-      id="startBatch"
+    <!--
+      ==================================================
+      POBIERANIE CAŁEGO FOLDERU GOOGLE DRIVE
+      ==================================================
+    -->
+
+    <a
       class="download-all"
-      type="button">
-      📦 POBIERZ ZDJĘCIA PO KOLEI
-    </button>
+      href="https://drive.google.com/drive/folders/1dtOKuykecCUBaxEH4P1vxb8iljJfP5yG?download=1"
+      target="_blank"
+      rel="noopener">
+
+      📦 POBIERZ WSZYSTKIE ZDJĘCIA
+
+    </a>
 
     <div class="download-info">
-      Pobieraj zdjęcia pojedynczo — wygodnie na telefonie.
+      Pobierz całą galerię z Google Drive
     </div>
-
-
-    <!-- PANEL POBIERANIA PO KOLEI -->
-
-    <section id="batchPanel" class="batch-panel">
-
-      <div id="batchCounter" class="batch-counter">
-        1 / 1
-      </div>
-
-      <div class="batch-image-wrap">
-        <img
-          id="batchImage"
-          class="batch-image"
-          src=""
-          alt="Zdjęcie">
-      </div>
-
-      <div id="batchButtons" class="batch-buttons">
-
-        <a
-          id="batchDownload"
-          class="batch-download"
-          href="#"
-          target="_blank"
-          rel="noopener">
-          ⬇ POBIERZ TO ZDJĘCIE
-        </a>
-
-        <button
-          id="batchNext"
-          class="batch-next"
-          type="button">
-          NASTĘPNE ZDJĘCIE →
-        </button>
-
-      </div>
-
-      <div
-        id="batchFinished"
-        class="batch-finished"
-        style="display:none;">
-        ✓ KONIEC GALERII
-      </div>
-
-    </section>
 
 
     <!-- GALERIA -->
 
     <section>
+
       <div
         id="gallery"
         class="gallery">
@@ -501,6 +392,7 @@
         </div>
 
       </div>
+
     </section>
 
 
@@ -546,18 +438,16 @@
       1 / 1
     </div>
 
-    <div class="lightbox-buttons">
+    <a
+      id="lightboxDownload"
+      class="lightbox-download"
+      href="#"
+      target="_blank"
+      rel="noopener">
 
-      <a
-        id="lightboxDownload"
-        class="lightbox-download"
-        href="#"
-        target="_blank"
-        rel="noopener">
-        ⬇ POBIERZ ZDJĘCIE
-      </a>
+      ⬇ POBIERZ ZDJĘCIE
 
-    </div>
+    </a>
 
   </div>
 
@@ -574,17 +464,21 @@
 <script>
 
   /*
-    =====================================================
-    WKLEJ TUTAJ SWÓJ AKTUALNY ADRES GOOGLE APPS SCRIPT
-    =====================================================
+  =====================================================
+  TWÓJ GOOGLE APPS SCRIPT
+  =====================================================
+
+  Wklej tutaj TEN SAM adres Web App,
+  którego używała wcześniejsza wersja strony.
   */
 
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxHbh3NOYIV00cJ8GNy_unOXHp3IKCTYbJF5Gyh-1O1W6VU7V0AJhZ1bF901UOJrMdJ/exec";
+  const WEB_APP_URL =
+    https://script.google.com/macros/s/AKfycbxHbh3NOYIV00cJ8GNy_unOXHp3IKCTYbJF5Gyh-1O1W6VU7V0AJhZ1bF901UOJrMdJ/exec;
 
 
   let photos = [];
+
   let currentPhoto = 0;
-  let batchIndex = 0;
 
 
   const gallery =
@@ -602,32 +496,11 @@
   const lightboxCounter =
     document.getElementById("lightboxCounter");
 
-  const batchPanel =
-    document.getElementById("batchPanel");
-
-  const batchImage =
-    document.getElementById("batchImage");
-
-  const batchDownload =
-    document.getElementById("batchDownload");
-
-  const batchCounter =
-    document.getElementById("batchCounter");
-
-  const batchNext =
-    document.getElementById("batchNext");
-
-  const batchButtons =
-    document.getElementById("batchButtons");
-
-  const batchFinished =
-    document.getElementById("batchFinished");
-
 
   /*
-    ==========================================
-    WCZYTYWANIE GALERII
-    ==========================================
+  =====================================================
+  WCZYTANIE GALERII
+  =====================================================
   */
 
   function loadGallery() {
@@ -636,49 +509,59 @@
       !WEB_APP_URL ||
       WEB_APP_URL.includes("TU_WKLEJ")
     ) {
+
       gallery.innerHTML = `
         <div class="empty">
           Nie ustawiono adresu Google Apps Script.
         </div>
       `;
+
       return;
     }
 
+
     const script =
       document.createElement("script");
+
 
     script.src =
       WEB_APP_URL +
       "?callback=galleryCallback&t=" +
       Date.now();
 
+
     document.body.appendChild(script);
+
   }
 
 
   /*
-    ==========================================
-    CALLBACK Z GOOGLE APPS SCRIPT
-    ==========================================
+  =====================================================
+  CALLBACK Z GOOGLE APPS SCRIPT
+  =====================================================
   */
 
   function galleryCallback(data) {
 
     if (!Array.isArray(data)) {
+
       gallery.innerHTML = `
         <div class="empty">
           Nie udało się wczytać galerii.
         </div>
       `;
+
       return;
     }
 
+
     /*
-      Odwracamy kolejność,
-      żeby najnowsze zdjęcia były pierwsze.
+      Najnowsze zdjęcia będą pierwsze.
     */
 
-    photos = data.reverse();
+    photos =
+      data.reverse();
+
 
     gallery.innerHTML = "";
 
@@ -695,79 +578,94 @@
     }
 
 
-    photos.forEach((photo, index) => {
+    photos.forEach(
+      function(photo, index) {
 
-      const item =
-        document.createElement("div");
+        const item =
+          document.createElement("div");
 
-      item.className = "photo";
-
-
-      const image =
-        document.createElement("img");
-
-      image.src = photo.url;
-
-      image.alt =
-        "Zdjęcie " + (index + 1);
-
-      image.loading = "lazy";
+        item.className =
+          "photo";
 
 
-      image.addEventListener(
-        "click",
-        () => openLightbox(index)
-      );
+        const image =
+          document.createElement("img");
+
+        image.src =
+          photo.url;
+
+        image.alt =
+          "Zdjęcie " + (index + 1);
+
+        image.loading =
+          "lazy";
 
 
-      const download =
-        document.createElement("a");
-
-      download.className =
-        "photo-download";
-
-      download.href =
-        photo.download;
-
-      download.target =
-        "_blank";
-
-      download.rel =
-        "noopener";
-
-      download.textContent =
-        "⬇ POBIERZ";
+        image.addEventListener(
+          "click",
+          function() {
+            openLightbox(index);
+          }
+        );
 
 
-      item.appendChild(image);
+        const download =
+          document.createElement("a");
 
-      item.appendChild(download);
+        download.className =
+          "photo-download";
 
-      gallery.appendChild(item);
+        download.href =
+          photo.download;
 
-    });
+        download.target =
+          "_blank";
+
+        download.rel =
+          "noopener";
+
+        download.textContent =
+          "⬇ POBIERZ";
+
+
+        item.appendChild(image);
+
+        item.appendChild(download);
+
+        gallery.appendChild(item);
+
+      }
+    );
 
   }
 
 
   /*
-    ==========================================
-    LIGHTBOX
-    ==========================================
+  =====================================================
+  LIGHTBOX
+  =====================================================
   */
 
   function openLightbox(index) {
 
-    if (!photos.length) return;
+    if (!photos.length) {
+      return;
+    }
 
-    currentPhoto = index;
+
+    currentPhoto =
+      index;
+
 
     updateLightbox();
 
+
     lightbox.classList.add("active");
+
 
     document.body.style.overflow =
       "hidden";
+
   }
 
 
@@ -777,12 +675,16 @@
 
     document.body.style.overflow =
       "";
+
   }
 
 
   function updateLightbox() {
 
-    if (!photos.length) return;
+    if (!photos.length) {
+      return;
+    }
+
 
     const photo =
       photos[currentPhoto];
@@ -800,30 +702,41 @@
       (currentPhoto + 1) +
       " / " +
       photos.length;
+
   }
 
 
   function nextPhoto() {
 
-    if (!photos.length) return;
+    if (!photos.length) {
+      return;
+    }
+
 
     currentPhoto =
       (currentPhoto + 1) %
       photos.length;
 
+
     updateLightbox();
+
   }
 
 
   function previousPhoto() {
 
-    if (!photos.length) return;
+    if (!photos.length) {
+      return;
+    }
+
 
     currentPhoto =
       (currentPhoto - 1 + photos.length) %
       photos.length;
 
+
     updateLightbox();
+
   }
 
 
@@ -851,11 +764,19 @@
     );
 
 
+  /*
+  =====================================================
+  KLIKNIĘCIE POZA ZDJĘCIEM = ZAMKNIĘCIE
+  =====================================================
+  */
+
   lightbox.addEventListener(
     "click",
     function(event) {
 
-      if (event.target === lightbox) {
+      if (
+        event.target === lightbox
+      ) {
         closeLightbox();
       }
 
@@ -864,26 +785,31 @@
 
 
   /*
-    ==========================================
-    KLAWIATURA
-    ==========================================
+  =====================================================
+  KLAWIATURA
+  =====================================================
   */
 
   document.addEventListener(
     "keydown",
     function(event) {
 
-      if (!lightbox.classList.contains("active")) {
+      if (
+        !lightbox.classList.contains("active")
+      ) {
         return;
       }
+
 
       if (event.key === "Escape") {
         closeLightbox();
       }
 
+
       if (event.key === "ArrowRight") {
         nextPhoto();
       }
+
 
       if (event.key === "ArrowLeft") {
         previousPhoto();
@@ -894,124 +820,13 @@
 
 
   /*
-    ==========================================
-    POBIERANIE ZDJĘĆ PO KOLEI
-    ==========================================
-  */
-
-  document
-    .getElementById("startBatch")
-    .addEventListener(
-      "click",
-      function() {
-
-        if (!photos.length) {
-          alert("Galeria nie zawiera jeszcze zdjęć.");
-          return;
-        }
-
-        batchIndex = 0;
-
-        batchPanel.classList.add("active");
-
-        showBatchPhoto();
-
-        batchPanel.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-
-      }
-    );
-
-
-  function showBatchPhoto() {
-
-    if (
-      batchIndex < 0 ||
-      batchIndex >= photos.length
-    ) {
-      return;
-    }
-
-
-    const photo =
-      photos[batchIndex];
-
-
-    batchImage.src =
-      photo.url;
-
-
-    batchDownload.href =
-      photo.download;
-
-
-    batchCounter.textContent =
-      (batchIndex + 1) +
-      " / " +
-      photos.length;
-
-
-    batchButtons.style.display =
-      "flex";
-
-    batchFinished.style.display =
-      "none";
-
-
-    /*
-      Po przejściu do kolejnego zdjęcia
-      przewijamy panel na górę.
-    */
-
-    batchPanel.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-
-  }
-
-
-  batchNext.addEventListener(
-    "click",
-    function() {
-
-      if (
-        batchIndex >=
-        photos.length - 1
-      ) {
-
-        batchButtons.style.display =
-          "none";
-
-        batchFinished.style.display =
-          "block";
-
-        batchCounter.textContent =
-          photos.length +
-          " / " +
-          photos.length;
-
-        return;
-      }
-
-
-      batchIndex++;
-
-      showBatchPhoto();
-
-    }
-  );
-
-
-  /*
-    ==========================================
-    OBSŁUGA SWIPE NA TELEFONIE
-    ==========================================
+  =====================================================
+  SWIPE NA TELEFONIE
+  =====================================================
   */
 
   let touchStartX = 0;
+
   let touchEndX = 0;
 
 
@@ -1023,7 +838,9 @@
         event.changedTouches[0].screenX;
 
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
 
@@ -1034,11 +851,14 @@
       touchEndX =
         event.changedTouches[0].screenX;
 
+
       const distance =
         touchEndX - touchStartX;
 
 
-      if (Math.abs(distance) < 50) {
+      if (
+        Math.abs(distance) < 50
+      ) {
         return;
       }
 
@@ -1050,14 +870,16 @@
       }
 
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
 
   /*
-    ==========================================
-    START
-    ==========================================
+  =====================================================
+  START
+  =====================================================
   */
 
   loadGallery();
